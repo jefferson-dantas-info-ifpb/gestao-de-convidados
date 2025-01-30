@@ -1,0 +1,10 @@
+{% extends 'layouts/base.html' %} {% block content %}
+<h1 class="mb-4">Verificar convidado na lista</h1>
+
+<form action="/" method="post">
+  <label for="nome" class="form-label">Nome do convidado</label>
+  <input type="text" class="form-control" name="nome" id="nome" autofocus />
+  <button type="submit" class="btn btn-success btn-lg mt-4">Verificar</button>
+</form>
+
+{% endblock %}

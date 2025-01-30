@@ -1,0 +1,21 @@
+{% extends 'layouts/base.html' %} {% block content %}
+<h1 class="mb-4">Login</h1>
+
+{% if error is defined %}
+<div class="alert alert-danger" role="alert">{{ error }}</div>
+{% endif %}
+
+<form action="/login" method="post">
+  <div class="mb-3">
+    <label for="email" class="form-label">E-mail</label>
+    <input type="email" class="form-control" name="email" id="email" value="{{ email }}" autofocus />
+  </div>
+
+  <div class="mb-3">
+    <label for="senha" class="form-label">Senha</label>
+    <input type="password" class="form-control" name="senha" id="senha" />
+  </div>
+
+  <button type="submit" class="btn btn-success btn-lg mt-4">Login</button>
+</form>
+{% endblock %}

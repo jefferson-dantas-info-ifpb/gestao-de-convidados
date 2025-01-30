@@ -1,0 +1,22 @@
+{% extends 'layouts/base.html' %} {% block content %}
+<h1 class="mb-4">Cadastrar convidado</h1>
+
+<form action="/cadastrar" method="post">
+  <div class="mb-3">
+    <label for="nome" class="form-label">Nome do convidado</label>
+    <input type="text" class="form-control" name="nome" id="nome" autofocus />
+  </div>
+  
+  <div class="mb-3">
+    <label for="email" class="form-label">E-mail</label>
+    <input type="email" class="form-control" name="email" id="email" />
+  </div>
+  
+  <div class="mb-3">
+    <label for="senha" class="form-label">Senha</label>
+    <input type="password" class="form-control" name="senha" id="senha" />
+  </div>
+
+  <button type="submit" class="btn btn-success btn-lg mt-4">Cadastrar</button>
+</form>
+{% endblock %}
