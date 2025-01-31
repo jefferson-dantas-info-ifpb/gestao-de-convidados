@@ -22,9 +22,9 @@ def verificar():
     convidado = procurar_convidado_pelo_nome(nome)
 
     if convidado is not None:
-        flash(f'O convidado "{nome}" está na lista!', "info")
+        flash(f'"{nome}" está na lista de convidados!', "info")
     else:
-        flash(f'O convidado "{nome}" NÃO está na lista!', "error")
+        flash(f'"{nome}" NÃO está na lista de convidados!', "error")
 
     return render_template(
         "index.html", convidado=nome, title="Verificar convidado na lista"
