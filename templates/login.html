@@ -8,12 +8,12 @@
 <form action="/login" method="post">
   <div class="mb-3">
     <label for="email" class="form-label">E-mail</label>
-    <input type="email" class="form-control" name="email" id="email" value="{{ email }}" autofocus />
+    <input type="email" class="form-control" name="email" id="email" value="{{ email }}" autofocus required />
   </div>
 
   <div class="mb-3">
     <label for="senha" class="form-label">Senha</label>
-    <input type="password" class="form-control" name="senha" id="senha" />
+    <input type="password" class="form-control" name="senha" id="senha" required />
   </div>
 
   <button type="submit" class="btn btn-success btn-lg mt-4">Login</button>
