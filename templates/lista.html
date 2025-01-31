@@ -1,0 +1,9 @@
+{% extends 'layouts/base.html' %} {% block content %}
+<h1 class="mb-4">Lista de convidados</h1>
+
+<ul>
+  {% for convidado in convidados %}
+  <li>{{ convidado.nome }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}
