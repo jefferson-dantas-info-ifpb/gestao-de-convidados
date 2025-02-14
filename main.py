@@ -1,10 +1,5 @@
+import gestao_db
 from flask import Flask, render_template, request, flash, redirect
-from convidados import (
-    Convidado,
-    convidados,
-    procurar_convidado_pelo_email,
-    procurar_convidado_pelo_nome,
-)
 
 app = Flask(__name__)
 app.secret_key = "fwi7kLYr7g9vzGZyYC9wxb21jiDoxe90"
@@ -19,7 +14,7 @@ def home():
 def verificar():
     nome = request.form["nome"]
 
-    convidado = procurar_convidado_pelo_nome(nome)
+    convidado = gestao_db.obter_usuario_por_nome(nome)
 
     if convidado is not None:
         flash(f'"{nome}" está na lista de convidados!', "info")
@@ -33,6 +28,7 @@ def verificar():
 
 @app.get("/lista")
 def lista():
+    convidados = gestao_db.listar_usuarios()
     return render_template(
         "lista.html", convidados=convidados, title="Lista de convidados"
     )
@@ -48,7 +44,7 @@ def login():
     email = request.form["email"]
     senha = request.form["senha"]
 
-    convidado = procurar_convidado_pelo_email(email)
+    convidado = gestao_db.obter_usuario_por_email(email)
 
     if convidado is None:
         flash("O convidado não está na lista", "error")
@@ -72,14 +68,13 @@ def cadastrar():
     email = request.form["email"]
     senha = request.form["senha"]
 
-    convidado = procurar_convidado_pelo_email(email)
+    convidado = gestao_db.obter_usuario_por_email(email)
 
     if convidado is not None:
         flash("Um convidado com este e-mail já está cadastrado", "error")
         return render_template("cadastrar.html", title="Cadastrar convidado")
 
-    novo_convidado = Convidado(nome, email, senha)
-    convidados.append(novo_convidado)
+    novo_convidado = gestao_db.inserir_usuario(nome, email, senha)
     flash("Convidado cadastrado com sucesso!", "info")
     return render_template(
         "convidado.html", convidado=novo_convidado, title="Convidado"
@@ -97,7 +92,7 @@ def recuperar_senha():
     nome = request.form["nome"]
     senha = request.form["senha"]
 
-    convidado = procurar_convidado_pelo_email(email)
+    convidado = gestao_db.obter_usuario_por_email(email)
 
     if convidado is None or convidado.nome.lower() != nome.lower():
         flash("O e-mail não existe ou o nome do convidado não está correto", "error")
@@ -105,7 +100,7 @@ def recuperar_senha():
             "recuperar_senha.html", email=email, nome=nome, title="Recuperar senha"
         )
 
-    convidado.senha = senha
+    gestao_db.atualizar_senha_usuario(convidado.id, senha)
     flash("Senha alterada com sucesso!", "info")
     return redirect("/login")
 
