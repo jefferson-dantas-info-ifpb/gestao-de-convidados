@@ -49,6 +49,19 @@ def atualizar_senha_usuario(id, senha):
     conn.close()
 
 
+def excluir_usuario(id):
+    conn = sqlite.connect("db.sqlite")
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        DELETE FROM usuarios WHERE id = ?
+        """,
+        (id,),
+    )
+    conn.commit()
+    conn.close()
+
+
 def listar_usuarios():
     conn = sqlite.connect("db.sqlite")
     cursor = conn.cursor()

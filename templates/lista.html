@@ -3,7 +3,13 @@
 
 <ul>
   {% for convidado in convidados %}
-  <li>{{ convidado.nome }}</li>
+  <li class="mb-2">
+    {{ convidado.nome }}
+    <form method="post" action="/excluir">
+      <input type="hidden" name="id" value="{{ convidado.id }}">
+      <button class="btn btn-danger btn-sm" type="submit">Excluir</button>
+    </form>
+  </li>
   {% endfor %}
 </ul>
 {% endblock %}

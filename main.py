@@ -81,6 +81,14 @@ def cadastrar():
     )
 
 
+@app.post("/excluir")
+def excluir():
+    id = request.form["id"]
+    gestao_db.excluir_usuario(id)
+    flash("Usuário excluído com sucesso!", "info")
+    return redirect("/lista")
+
+
 @app.get("/recuperar_senha")
 def recuperar_senha_page():
     return render_template("recuperar_senha.html", title="Recuperar senha")
